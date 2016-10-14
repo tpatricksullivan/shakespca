@@ -1,2 +1,2 @@
 # shakeseg
-possible model to categorize shakespeare plays
+Model to categorize shakespeare plays for MSCA Linear Algebra class
