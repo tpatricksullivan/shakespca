@@ -1,3 +1,4 @@
+import os
 import urllib2
 import re
 import createPlayMap
@@ -16,6 +17,8 @@ def main(input_file):
 
 def clean_html(url, play):
     u = urllib2.urlopen(url)
+    if not os.path.exists('data/'):
+        os.mkdir('data/')
     f = open('data/{0}.txt'.format(play), 'w')
     for line in u:
         line = re.sub('<br/>', '', line)

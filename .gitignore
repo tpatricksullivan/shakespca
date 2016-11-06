@@ -1,5 +1,6 @@
 # data files
 data/
+data_parsed/
 
 #ide files
 .idea/
