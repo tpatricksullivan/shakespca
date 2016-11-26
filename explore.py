@@ -2,9 +2,31 @@ import pandas as pd
 import getPlayMetadata
 import cleanTaggedData
 import pandasql
+import numpy as np
+import analyze
+from matplotlib import pyplot as plt
+from sklearn.decomposition import PCA as sklearnPCA
 
-playMd = getPlayMetadata.main()
-df, df_md = cleanTaggedData.get_tagged_data("./data_tagged/")
+playmap, df, df_md, df_ng = analyze.analyze()
+sklearn_pca = sklearnPCA(n_components = 2)
+df_transform = sklearn_pca.fit_transform(df)
+with plt.style.context('fivethirtyeight'):
+    plt.figure(figsize=(6, 4))
+    for lab, col in zip(('History', 'Comedy', 'Tragedy'),
+                        ('blue', 'red', 'green')):
+        pls = playmap.First_Folio_category[ playmap['First_Folio_category']==lab].index
+        plt.scatter(df_transform[pls, 0],
+                    df_transform[pls, 1],
+                    label=lab,
+                    c=col)
+    for i in range(0,39):
+        plt.text( df_transform[i,0], df_transform[i,1], df_md.text_key[i])
+    plt.text( 1,1, 'hello' )
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.legend(loc='lower left')
+    plt.tight_layout()
+    plt.show()
 
 
 
