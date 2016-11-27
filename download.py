@@ -6,8 +6,9 @@ import getTextMetadata
 
 def shakespeare_plays(input_file):
     url_template = 'http://www.folgerdigitaltexts.org/{0}/text'
-    play_map = getTextMetadata.main(input_file)
-    for play in play_map['play_code']:
+    text_map = getTextMetadata.main(input_file)
+    play_map = text_map[ (text_map["First_Folio_category"] != "Other")]
+    for play in play_map['text_code']:
         url = url_template.format(play)
         print('downloading and stripping play {0}: {1}'.format(play, url))
         download_clean_play(url, play)
