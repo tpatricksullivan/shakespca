@@ -1,5 +1,5 @@
 import pandas as pd
-import getPlayMetadata
+import getTextMetadata
 import cleanTaggedData
 import pandasql
 import numpy as np
@@ -7,21 +7,25 @@ import analyze
 from matplotlib import pyplot as plt
 from sklearn.decomposition import PCA as sklearnPCA
 
-playmap, df, df_md, df_ng = analyze.analyze()
+
+text_md, df_tg, df_tg_md, df_ng = analyze.analyze()
 sklearn_pca = sklearnPCA(n_components = 2)
-df_transform = sklearn_pca.fit_transform(df)
+df_justS = df_tg.index.isin(['prideandprejudice','leviathan'])
+df_transform = sklearn_pca.fit_transform(df_tg[~df_justS])
+
 with plt.style.context('fivethirtyeight'):
     plt.figure(figsize=(6, 4))
     for lab, col in zip(('History', 'Comedy', 'Tragedy'),
                         ('blue', 'red', 'green')):
-        pls = playmap.First_Folio_category[ playmap['First_Folio_category']==lab].index
+        pls = text_md.First_Folio_category[ text_md['First_Folio_category']==lab].index
+        df_tg[~df_justS]
         plt.scatter(df_transform[pls, 0],
                     df_transform[pls, 1],
                     label=lab,
                     c=col)
-    for i in range(0,39):
-        plt.text( df_transform[i,0], df_transform[i,1], df_md.text_key[i])
-    plt.text( 1,1, 'hello' )
+    #for i in range(0,39):
+    #    plt.text( df_transform[i,0], df_transform[i,1], df_md.text_key[i])
+    #plt.text( df_transform[:,0], df_transform[:,1], df_tg.index)
     plt.xlabel('Principal Component 1')
     plt.ylabel('Principal Component 2')
     plt.legend(loc='lower left')

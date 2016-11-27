@@ -1,0 +1,42 @@
+text_code,Text,First_Folio_category,Shakespeare
+AWW,All's Well That Ends Well,Comedy,TRUE
+Ant,Antony and Cleopatra,Tragedy,TRUE
+AYL,As You Like It,Comedy,TRUE
+Err,The Comedy of Errors,Comedy,TRUE
+Cor,Coriolanus,Tragedy,TRUE
+Cym,Cymbeline,Tragedy,TRUE
+Ham,Hamlet,Tragedy,TRUE
+1H4,"Henry IV, Part 1",History,TRUE
+2H4,"Henry IV, Part 2",History,TRUE
+H5,Henry V,History,TRUE
+1H6,"Henry VI, Part 1",History,TRUE
+2H6,"Henry VI, Part 2",History,TRUE
+3H6,"Henry VI, Part 3",History,TRUE
+H8,Henry VIII,History,TRUE
+JC,Julius Caesar,Tragedy,TRUE
+Jn,King John,History,TRUE
+Lr,King Lear,Tragedy,TRUE
+LLL,Love's Labor's Lost,Comedy,TRUE
+Mac,Macbeth,Tragedy,TRUE
+MM,Measure for Measure,Comedy,TRUE
+MV,The Merchant of Venice,Comedy,TRUE
+Wiv,The Merry Wives of Windsor,Comedy,TRUE
+MND,A Midsummer Night's Dream,Comedy,TRUE
+Ado,Much Ado About Nothing,Comedy,TRUE
+Oth,Othello,Tragedy,TRUE
+Per,Pericles,Tragedy,TRUE
+R2,Richard II,History,TRUE
+R3,Richard III,History,TRUE
+Rom,Romeo and Juliet,Tragedy,TRUE
+Shr,The Taming of the Shrew,Comedy,TRUE
+Tmp,The Tempest,Comedy,TRUE
+Tim,Timon of Athens,Tragedy,TRUE
+Tit,Titus Andronicus,Tragedy,TRUE
+Tro,Troilus and Cressida,Tragedy,TRUE
+TN,Twelfth Night,Comedy,TRUE
+TGV,Two Gentlemen of Verona,Comedy,TRUE
+TNK,Two Noble Kinsmen,Comedy,TRUE
+WT,The Winter's Tale,Comedy,TRUE
+son,Sonnets,Other,TRUE
+prideandprejudice,Pride and Prejudice,Other,FALSE
+leviathan,Leviathan,Other,FALSE

@@ -7,7 +7,7 @@ from collections import defaultdict
 
 
 metadata_columns = {'text_name',
-                    'text_key',
+                    # 'text_key', this becomes the index
                     'token_csv_name',
                     'chunk_index',
                     '!UNRECOGNIZED',
@@ -25,7 +25,7 @@ def get_tagged_texts(_dir = './data_tagged/'):
     output_file = os.path.join(_dir, latest, 'csv', 'data-ubiq.csv')
     if not os.path.exists(output_file):
         raise IOError("could not find file %s" % output_file)
-    df = pd.read_csv(output_file)
+    df = pd.read_csv(output_file, index_col=1)
     df_metadata = df[list(metadata_columns)]
     df = df[df.columns.difference(metadata_columns)]
 
@@ -56,7 +56,7 @@ def get_ngrams(_dir = './data_tagged/'):
         m = re.search('/data-(.*)-1grams.csv', f)
         if not m:
             raise IOError("file %s is not a 1gram data file" % f)
-        text_key = m.group(1)
+        text_key = m.group(1).lower()
         with open(f, 'r') as f_reading:
             f_reading.next()
             for line in f_reading:
@@ -65,6 +65,7 @@ def get_ngrams(_dir = './data_tagged/'):
                     res[text_key][word] = int(freq)
     res = pd.DataFrame.from_dict(res, orient='index')
     res = res.div( res.sum(axis = 1), axis = 0 ) * 100
+    res.fillna(value=0, inplace=True)
     return res
 
 

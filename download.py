@@ -1,12 +1,12 @@
 import os
 import urllib2
 import re
-import getPlayMetadata
+import getTextMetadata
 
 
 def shakespeare_plays(input_file):
     url_template = 'http://www.folgerdigitaltexts.org/{0}/text'
-    play_map = getPlayMetadata.main(input_file)
+    play_map = getTextMetadata.main(input_file)
     for play in play_map['play_code']:
         url = url_template.format(play)
         print('downloading and stripping play {0}: {1}'.format(play, url))
@@ -80,7 +80,7 @@ def gutenberg_text(friendly_name, url):
     return 0
 
 if __name__ == "__main__":
-    shakespeare_plays("playMetadata.csv")
+    shakespeare_plays("textMetadata.csv")
     shakespeare_sonnets()
     gutenberg_texts([('Pride and Prejudice', 'http://www.gutenberg.org/files/1342/1342-0.txt'),
                       ('Leviathan', 'http://www.gutenberg.org/cache/epub/3207/pg3207.txt')]
