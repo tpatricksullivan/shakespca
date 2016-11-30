@@ -28,6 +28,10 @@ def get_tagged_texts(_dir = './data_tagged/'):
     df = pd.read_csv(output_file, index_col=1)
     df_metadata = df[list(metadata_columns)]
     df = df[df.columns.difference(metadata_columns)]
+    df.sort_index(inplace=True)
+    # drop any columns that are all zero
+    df = df.loc[:, (df != 0).any(axis=0)]
+    df_metadata.sort_index(inplace=True)
 
     return df, df_metadata
 
@@ -46,26 +50,32 @@ def find_latest_Ubq(_dir = './data_tagged/'):
     return res
 
 
-def get_ngrams(_dir = './data_tagged/'):
+def get_ngrams(_dir = './data_tagged/', topn = 1000):
     """Get mxn matrix of m texts and n n-gram frequencies"""
     latest = find_latest_Ubq(_dir)
     output_dir = os.path.join(_dir, latest, 'ngram', 'perDocNgrams', 'data*1grams.csv')
+    ngram_freq = os.path.join(_dir, latest, 'ngram', 'data-1grams.csv')
+    most_common = pd.read_csv(ngram_freq, nrows = topn)['ngram']
     output_files = glob.glob(output_dir)
     res = defaultdict(lambda: defaultdict(lambda: 0))
     for f in output_files:
         m = re.search('/data-(.*)-1grams.csv', f)
         if not m:
             raise IOError("file %s is not a 1gram data file" % f)
-        text_key = m.group(1).lower()
+        text_key = m.group(1).lower().replace(' ','')
         with open(f, 'r') as f_reading:
             f_reading.next()
+            total = 0
             for line in f_reading:
                 (word, freq, rank) = line.rsplit(',', 2)
-                if not bool(re.match("[0-9\.]+", word)):
+                total += int(freq)
+                use_word = (not bool(re.match("[0-9\.]+", word))) & (word in most_common.values)
+                if use_word:
                     res[text_key][word] = int(freq)
     res = pd.DataFrame.from_dict(res, orient='index')
     res = res.div( res.sum(axis = 1), axis = 0 ) * 100
     res.fillna(value=0, inplace=True)
+    res.sort_index(axis = 0, ascending = True, inplace = True)
     return res
 
 
