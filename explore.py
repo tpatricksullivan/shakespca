@@ -4,10 +4,6 @@ from matplotlib import pyplot as plt
 from collections import namedtuple
 
 
-import numpy as np
-from collections import namedtuple
-
-
 def Principal_Components(A):
     assert (isinstance(A, pd.DataFrame))
 
@@ -45,15 +41,15 @@ def PC_Transform(inp, n_components):
 
 def plot_PCA(Y, md_, title_, p, fig_):
 
-    fig_.add_subplot(1,2,p)
-    for lab, col in zip( md_['First_Folio_category'].unique(),
+    fig_.add_subplot(1, 2, p)
+    for lab, col in zip(md_['First_Folio_category'].unique(),
                         ('blue', 'red', 'green', 'orange')):
         txts = md_['First_Folio_category'] == lab
-        plt.scatter(Y.loc[txts,0], Y.loc[txts,1], label=lab, c=col, alpha = 0.4, s = 70)
+        plt.scatter(Y.loc[txts, 0], Y.loc[txts, 1], label=lab, c=col, alpha=0.4, s=70)
     for pl in Y.index:
-        plt.text(Y.loc[pl, 0]+0.1, Y.loc[pl, 1]+0.1, pl, fontsize = 18)
-    plt.xlabel('Principal Component 1', fontsize = 14)
-    plt.ylabel('Principal Component 2', fontsize = 14)
-    plt.title(title_, fontsize = 20)
+        plt.text(Y.loc[pl, 0]+0.1, Y.loc[pl, 1]+0.1, pl, fontsize=18)
+    plt.xlabel('Principal Component 1', fontsize=14)
+    plt.ylabel('Principal Component 2', fontsize=14)
+    plt.title(title_, fontsize=20)
 
     return 0
