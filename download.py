@@ -5,6 +5,7 @@ import getTextMetadata
 
 
 def shakespeare_plays(input_file):
+    """Download the plays"""
     url_template = 'http://www.folgerdigitaltexts.org/{0}/text'
     text_map = getTextMetadata.main(input_file)
     play_map = text_map[ (text_map["First_Folio_category"] != "Other")]
@@ -17,6 +18,7 @@ def shakespeare_plays(input_file):
 
 
 def download_clean_play(url, play):
+    """Clean non-text elements from Folger download"""
     u = urllib2.urlopen(url)
     if not os.path.exists('data/'):
         os.mkdir('data/')
@@ -30,6 +32,7 @@ def download_clean_play(url, play):
 
 
 def shakespeare_sonnets():
+    """Download and clean non-text elements from the Sonnets"""
     url = 'http://www.folgerdigitaltexts.org/download/txt/Son.txt'
     u = urllib2.urlopen(url)
     if not os.path.exists('data/'):
@@ -53,6 +56,7 @@ def shakespeare_sonnets():
 
 
 def gutenberg_texts(texts):
+    """Download all texts from the input list from Gutenberg"""
     for t in texts:
         gutenberg_text(t[0], t[1])
 
@@ -60,6 +64,7 @@ def gutenberg_texts(texts):
 
 
 def gutenberg_text(friendly_name, url):
+    """Download and clean non-text elements from Gutenberg project text"""
     u = urllib2.urlopen(url)
     print('downloading text {0}: {1}'.format(friendly_name, url) )
     if not os.path.exists('data/'):
