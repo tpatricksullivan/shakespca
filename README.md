@@ -5,7 +5,7 @@ I wrote this project for a class on Linear Algebra as part of the [University of
 I recommend running the analysis by executing the Jupyter notebook at [shakespca.ipynb](shakespca.ipynb).
 
 ## Dependencies
-The Jupyter notebook above uses two libraries. Docuscope is a dictionary of words grouped by "Language Action Types" (LATs). There are multiple versions. I used the open source one available on [GitHub][gh Docuscope]. [Ubiqu-Ity][Ubiqu] is an academic tool for parsing texts that works well with Docuscope. It creates a vector for each text with the frequency of words used in each category. It can also count n-grams. The source code is available from [GitHub][gh Ubiqu] under the BSD License.
+The Jupyter notebook above uses two libraries. [Docuscope][Docuscope] is a dictionary of words grouped by "Language Action Types" (LATs). There are multiple versions. I used the open source one available on [GitHub][gh Docuscope]. [Ubiqu-Ity][Ubiqu] is an academic tool for parsing texts that works well with Docuscope. It creates a vector for each text with the frequency of words used in each category. It can also count n-grams. The source code is available from [GitHub][gh Ubiqu] under the BSD License.
 
 I would like to thank the authors of these libraries.
 
