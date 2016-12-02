@@ -1,3 +1,7 @@
+#
+*.pdf
+*.html
+
 # data files
 data/
 data_tagged/
